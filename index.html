@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body>
+    	<div id="main"> 
+    		<ul id="menu_list">
+    			<li class="menu" value=1500>김밥(1500)</li>
+    			<li class="menu" value=2000>떡볶이(2000)</li>
+    			<li class="menu" value=10000>피자(10000)</li>
+    			<li class="menu" value=20000>족발(20000)</li>
+    			<li class="menu" value=3000>자장면(3000)</li>
+    			<li class="menu" value=3500>짬뽕(3500)</li>
+    			<li class="menu" value=15000>치킨(15000)</li>
+    			<li class="menu" value=8000>햄버거(8000)</li>
+    		</ul>
+    		<div id="order">
+    			<div id="order_screen"> </div>
+    			<button id="order_button">주문하기</button>
+				<button id="reset_button">취소</button>
+    		</div>
+    		<div id="account">
+    			<ul id="cash_list">
+	    			<li class="cash" value=100>100</li>
+	    			<li class="cash" value=500>500</li>
+	    			<li class="cash" value=1000>1000</li>
+	    			<li class="cash" value=5000>5000</li>
+	    			<li class="cash" value=10000>10000</li>
+    			</ul>
+    			<div id="currrent_cash">
+    				current cash : 
+    				<input type="text" id="wallet" value="" readonly="true" />
+    			</div>
+    		</div>
+    	</div>
+    </body>
+</html>

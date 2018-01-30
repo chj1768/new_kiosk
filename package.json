@@ -1,0 +1,14 @@
+{
+  "name": "new_kiosk",
+  "version": "1.0.0",
+  "description": "kiosk using es5 & jquery",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chj1768/new_kiosk.git"
+  },
+  "author": "joy.hj",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
