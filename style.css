@@ -124,10 +124,10 @@ a:hover, a:active, a:focus { text-decoration:underline }
     margin: 0 auto;
     text-align: center;
     display: flex;}
-#currrent_cash { 
+#deposit_wrap + #wallet_wrap { 
         padding: 15px 6px;
     color: black; }
-#wallet {     border: none; }
+#wallet + #deposit { border: none; }
 
 @media only screen and (max-width: 400px) {
     .menu { font-size: 12px; }

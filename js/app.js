@@ -1,8 +1,9 @@
 
 function kiosk() {
  
-	var currentOrderBalance, currentOrderList, deposit, walletBalance, firstSoldOut, secondSoldOut;
+	var currentOrderBalance, currentOrderList, balance, walletBalance, firstSoldOut, secondSoldOut;
 	var menuList = Array.from( $( ".menu" ) );
+	var cashList = Array.from( $( ".cash" ) );
 
 	function randomizeMenu() {
 
@@ -21,17 +22,51 @@ function kiosk() {
   		menuList[ firstSoldOut ].className = 'soldout menu';
   		menuList[ secondSoldOut ].className = 'soldout menu';
   		menuList.forEach( item => {
-  			if( !item.className.includes( 'soldout' ) &&  item.value <= deposit ) {
+  			if( !item.className.includes( 'soldout' ) &&  item.value <= balance ) {
   				item.style.color = 'black';
           		item.style.cursor = 'pointer';
-  				item.onclick = this.addMenu.bind( this, item.textContent, item.value );
+  				//item.onclick = this.addMenu.bind( this, item.textContent, item.value );
   			}
-  			else if ( !item.className.includes( 'soldout' ) && item.value > deposit ) {
+  			else if ( !item.className.includes( 'soldout' ) && item.value > balance ) {
   				item.style.color = '#ddd';
           		item.style.cursor = 'not-allowed';
   			}
   		});
   		
+  	};
+
+  	function deposit( data ) {
+
+  		if( data <= walletBalance ) {
+			balance += data;
+			walletBalance -= data;
+			renderDeposit( balance );
+			renderWallet( walletBalance );
+		}
+		else {
+			alert('돈이 없어요!');
+		}
+
+  	};
+
+  	function addClickListenerinCashList() {
+
+  		cashList.forEach( item => {
+	        item.onclick = deposit.bind( this, item.value );	         
+    	});
+
+  	};
+
+  	function renderDeposit( balance ) {
+
+  		$( "#deposit" ).val( balance );
+
+  	};
+
+  	function renderWallet( walletBalance ) {
+
+  		$( "#wallet" ).val( walletBalance );
+
   	};
 
  //private
@@ -41,7 +76,7 @@ function kiosk() {
 
 			currentOrderBalance =  isOrdering ? localStorage.getItem( "currentOrderBalance" ) : 0;
 			currentOrderList = isOrdering ? localStorage.getItem( "currentOrderList" ) : [];
-			deposit = isOrdering ? localStorage.getItem( "deposit" ) : 0;
+			balance = isOrdering ? localStorage.getItem( "balance" ) : 0;
 			walletBalance =  isOrdering ? localStorage.getItem( "walletBalance" ) : 20000;
 
 			if ( !isOrdering ) randomizeMenu();
@@ -50,7 +85,7 @@ function kiosk() {
 
 		},
 
-		getDeposit : function() {
+		/*getDeposit : function() {
 			return deposit;
 		},
 
@@ -64,11 +99,16 @@ function kiosk() {
 
 		setDeposit : function( data ) {
 			deposit = data;
-		},
+		},*/
 
 		render : function() { //view 
 			renderMenuList();
-			renderScreen();
+			addClickListenerinCashList();
+			//document.getElementById( 'reset_button' ).onclick = this.removeMenu;
+    		//document.getElementById( 'order_button' ).onclick = this.orderMenu;
+			renderDeposit( balance );
+			renderWallet( walletBalance );
+
 		}
   };
  
