@@ -18,7 +18,7 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
         renderDeposit( balance );
         renderWallet( walletBalance );
         renderMenuList();
-  	};
+  	}
 
   	function orderMenu( name, price ) {
   		if ( currentOrderBalance + price > balance ) {
@@ -34,7 +34,7 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
   		}
   		currentOrderBalance += price;
   		renderOrderList();
-  	};
+  	}
 
   	function cancelMenu( name ) {
   		currentOrderBalance -= currentOrderList[ name ].price;
@@ -45,20 +45,20 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
   		}
   		//>(0) 성격이 다른 경우에 한줄 띄어준다. 이보다는 메소드로 빼주는게 더 좋은방법
   		renderOrderList(); //함수 위아래 비우지 않기
-  	};
+  	}
 
   	function order() {
 
-  	};
+  	}
 
   	function cancel() {
 
-  	};
+  	}
 
   	function addClickListenerinBtns() {
         $('#reset_button').on('click', this.cancel);
         $('#order_button').on('click', this.order);
-	};
+	}
 
 
     //view
@@ -70,21 +70,21 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
   		/*cashList.forEach( function(item) { //event delegation 방식으로 바꿀 것. 리스트 개별적으로 하나하나 이벤트 걸어주는게 별로 성능상 안좋음. 내부 리스트의 내용이 바뀔 경우 꼭 위임 필요
 	        item.onclick = deposit.bind( null, item.value );	         
     	});*/
-  	};
+  	}
 
   	function renderDeposit() { //내부 선언된 데이터는 파라미터로 줄 필요 없음
   		$( "#deposit" ).val( balance );
 
-  	};
+  	}
 
   	function renderWallet() {
   		$( "#wallet" ).val( walletBalance );
-  	};
+  	}
 
   	function renderSoldOutMenu() {
   		menuList[ firstSoldOut ].set( "className", "soldout menu" );
   		menuList[ secondSoldOut ].set( "className", "soldout menu" );
-  	};
+  	}
 
   	function renderMenuList() {
   		menuList.forEach( function(item) {
@@ -99,14 +99,14 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
           		item.style.cursor = 'not-allowed';
   			}
   		});
-  	};
+  	}
 
   	function createOrderItem( name, price ) {
   		var item = $( "<div>" ).text( '메뉴 : ' + name + '/ 수량 : ' + price ).attr( "className", "orderItem" );
   		var plusBtn = $( "<span>" ).text( '+' ).addClass( "modifyOrder" ).click( orderMenu.bind( null, name, price ));// on('click', "li", function);
   		var minusBtn = $( "<span>" ).text( '-' ).addClass( "modifyOrder" ).click( cancelMenu.bind( null, name ));// text -> html 
   		return item.append(plusBtn).append(minusBtn);
-  	};
+  	}
 
   	function renderOrderList() {
   		$( '#order_screen' ).empty();//매번 지울 필요도없 
@@ -118,7 +118,7 @@ function kiosk() { //스트링 - 변수로 캐시해서 사용하면 유지보�
 	      		}
 	      	}
     	}
-  	};
+  	}
 
   	function render() {
         renderSoldOutMenu();
