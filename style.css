@@ -7,7 +7,7 @@ ul, ol { list-style:none }
 em, address { font-style:normal }
 a { text-decoration:none }
 a:hover, a:active, a:focus { text-decoration:underline }
-
+/* css js로 컨트롤하는 애들은 -, */
 #main {
 	position:relative;
 }
@@ -25,7 +25,7 @@ a:hover, a:active, a:focus { text-decoration:underline }
 	clear:both;
 }
 
-.menu {
+.menu { /* == #menu_list > li  */
 	display: inline-block;
     width: 24.6%;
     border: 1px solid #ddd;

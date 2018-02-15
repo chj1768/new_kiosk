@@ -40,5 +40,21 @@
                 </div>
     		</div>
     	</div>
+		<script>
+            $(document).ready(function(){
+                var isOrdering = !!localStorage.getItem( "isOrdering" );
+                var initialData = {
+                    currentOrderBalance : isOrdering ? localStorage.getItem("currentOrderBalance") : 0,
+                    currentOrderList : isOrdering ? localStorage.getItem("currentOrderList") : {},
+                    balance : isOrdering ? localStorage.getItem("balance") : 0,
+                    walletBalance :  isOrdering ? localStorage.getItem("walletBalance") : 20000
+                };
+                var kioskInstance = kiosk();
+                if(isOrdering) kioskInstance.randomizeMenu();
+                initialData.firstSoldOut = parseInt( localStorage.getItem("firstSoldOut"), 10 );
+                initialData.secondSoldOut = parseInt( localStorage.getItem("secondSoldOut"), 10 );
+                kioskInstance.init( initialData );
+            });
+		</script>
     </body>
 </html>
