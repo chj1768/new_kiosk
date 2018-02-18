@@ -45,16 +45,39 @@
                 var isOrdering = !!localStorage.getItem( "isOrdering" );
                 var initialData = {
                     currentOrderBalance : isOrdering ? localStorage.getItem("currentOrderBalance") : 0,
-                    currentOrderList : isOrdering ? localStorage.getItem("currentOrderList") : {},
+                    currentOrderList :
+						isOrdering ? localStorage.getItem("currentOrderList") : initOrderList(Array.from($(".menu"))),
                     balance : isOrdering ? localStorage.getItem("balance") : 0,
                     walletBalance :  isOrdering ? localStorage.getItem("walletBalance") : 20000
                 };
                 var kioskInstance = kiosk();
-                if(isOrdering) kioskInstance.randomizeMenu();
+                if(isOrdering) randomizeMenu($(".menu").length);
                 initialData.firstSoldOut = parseInt( localStorage.getItem("firstSoldOut"), 10 );
                 initialData.secondSoldOut = parseInt( localStorage.getItem("secondSoldOut"), 10 );
                 kioskInstance.init( initialData );
             });
+
+            var initOrderList = function(list) {
+              var orderList = {};
+              var listPrice;
+              var listName;
+              for(var i =0; i <list.length; i++) {
+                  listPrice = list[i].value;
+                  listName = list[i].name;
+                  orderList.listName = { price : listPrice, count : 0 };
+			  }
+			  return orderList;
+			};
+
+            var randomizeMenu = function(listLength) {
+                var firstMenuIndex = Math.floor(Math.random() * listLength);
+                var secondMenuIndex = -1;
+                do {
+                    secondMenuIndex = Math.floor(Math.random() * listLength);
+                } while (firstMenuIndex === secondMenuIndex);
+                localStorage.setItem("firstSoldOut", firstMenuIndex.toString());
+                localStorage.setItem("secondSoldOut", secondMenuIndex.toString());
+            };
 		</script>
     </body>
 </html>
